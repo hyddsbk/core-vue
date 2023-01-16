@@ -11,7 +11,7 @@ export const reactive = (raw) => {
     set(target, key, value) {
       const res = Reflect.set(target, key, value);
       // 触发依赖
-      trigger(target, key, value);
+      trigger(target, key);
       return res;
     },
   });
