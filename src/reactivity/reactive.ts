@@ -1,4 +1,4 @@
-import { mutableHandlers, readonlyHandlers } from "./baseHandler";
+import { mutableHandlers, ReactiveFlag, readonlyHandlers } from "./baseHandler";
 
 export const reactive = (raw) => {
   return createActiveObject(raw, mutableHandlers);
@@ -6,6 +6,14 @@ export const reactive = (raw) => {
 
 export const readonly = (raw) => {
   return createActiveObject(raw, readonlyHandlers);
+};
+
+export const isReactive = (value) => {
+  return !!value[ReactiveFlag["IS_REACTIVE"]];
+};
+
+export const isReadonly = (value) => {
+  return !!value[ReactiveFlag["IS_READONLY"]];
 };
 
 function createActiveObject(raw, baseHandlers) {

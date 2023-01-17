@@ -1,4 +1,4 @@
-import { readonly } from "../reactive";
+import { isReadonly, readonly } from "../reactive";
 describe("readonly", () => {
   it("happy path", () => {
     // not set  不需要get 所以不需要搜集依赖和触发依赖
@@ -8,6 +8,9 @@ describe("readonly", () => {
 
     expect(wrapped).not.toBe(original);
     expect(wrapped.foo).toBe(1);
+
+    expect(isReadonly(original)).toBe(false);
+    expect(isReadonly(wrapped)).toBe(true);
   });
 
   it("warn then call set", () => {
