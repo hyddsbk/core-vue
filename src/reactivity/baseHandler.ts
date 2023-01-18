@@ -4,11 +4,6 @@ const get = createGetter();
 const set = createSetter();
 const readonlyGet = createGetter(true);
 
-export const enum ReactiveFlag {
-  "IS_REACTIVE" = "__v_isReactive",
-  "IS_READONLY" = "__v_isReadonly",
-}
-
 function createGetter(isReadOnly = false) {
   return function get(target, key) {
     if (key === "__v_isReactive") {
