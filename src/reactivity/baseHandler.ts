@@ -1,4 +1,6 @@
+import { isObject } from "../shared";
 import { track, trigger } from "./effect";
+import { reactive, readonly } from "./reactive";
 
 const get = createGetter();
 const set = createSetter();
@@ -13,6 +15,10 @@ function createGetter(isReadOnly = false) {
     }
 
     const res = Reflect.get(target, key);
+
+    if (isObject(res)) {
+      return isReadOnly ? readonly(res) : reactive(res);
+    }
 
     // 依赖收集
     if (!isReadOnly) {
