@@ -65,8 +65,13 @@ describe("effect", () => {
     expect(dummy).toBe(2);
 
     stop(runner);
-    obj.prop = 3;
+    // obj.prop = 3; 只有set
 
+    // get set
+    // obj.prop = obj.prop + 1;
+    // get触发了依赖收集
+    // 当执行stop函数后想法办阻止get依赖收集
+    obj.prop++;
     expect(dummy).toBe(2);
 
     runner();

@@ -4,7 +4,6 @@ export const enum ReactiveFlag {
   "IS_REACTIVE" = "__v_isReactive",
   "IS_READONLY" = "__v_isReadonly",
 }
-
 export const reactive = (raw) => {
   return createActiveObject(raw, mutableHandlers);
 };
