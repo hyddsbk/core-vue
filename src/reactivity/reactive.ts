@@ -1,4 +1,8 @@
-import { mutableHandlers, readonlyHandlers } from "./baseHandler";
+import {
+  mutableHandlers,
+  readonlyHandlers,
+  shallowReadonlyHandlers,
+} from "./baseHandler";
 
 export const enum ReactiveFlag {
   "IS_REACTIVE" = "__v_isReactive",
@@ -10,6 +14,10 @@ export const reactive = (raw) => {
 
 export const readonly = (raw) => {
   return createActiveObject(raw, readonlyHandlers);
+};
+
+export const shallowReadonly = (raw) => {
+  return createActiveObject(raw, shallowReadonlyHandlers);
 };
 
 // 触发target (value) get操作 拿到isReadonly
