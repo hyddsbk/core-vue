@@ -64,7 +64,10 @@ export const track = (target, key) => {
     dep = new Set();
     depsMap.set(key, dep);
   }
+  trackEffect(dep);
+};
 
+export const trackEffect = (dep) => {
   // 依赖是否存在
   if (dep.has(activeEffect)) return;
   // 收集到targetMap中
@@ -77,7 +80,7 @@ export const track = (target, key) => {
  * 是否需要收集依赖
  * @returns Boolean
  */
-function isTracking() {
+export function isTracking() {
   return shouldTrack && activeEffect !== undefined;
 }
 
@@ -85,6 +88,10 @@ export const trigger = (target, key) => {
   const depsMap = targetMap.get(target);
   const deps = depsMap.get(key);
 
+  triggerEffect(deps);
+};
+
+export const triggerEffect = (deps) => {
   for (const effect of deps) {
     if (effect.scheduler) {
       effect.scheduler();
