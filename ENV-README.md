@@ -11,7 +11,7 @@
 `npx tsc --init`
 
 
-安装 jest 环境  类型申明文件
+安装 jest 环境  类型申明文件  https://jestjs.io/
 `npm i jest @types/jest --dev`
 
 tsconfig.js 中设置

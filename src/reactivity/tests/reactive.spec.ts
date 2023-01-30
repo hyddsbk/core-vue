@@ -7,7 +7,7 @@ describe("reactive", () => {
     let nextAge;
     nextAge = user.age + 1;
 
-    expect(nextAge).not.toBe(user);
+    expect(obj).not.toBe(user);
     expect(nextAge).toBe(2);
 
     expect(isReactive(obj)).toBe(false);
