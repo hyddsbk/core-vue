@@ -13,7 +13,22 @@ export const setupComponent = (instance) => {
 };
 
 function setupStatefulComponent(instance: any) {
+  console.log("instance: ", instance);
   const Component = instance.type;
+  // 代理组件
+  instance.proxy = new Proxy(
+    {},
+    {
+      get(target, key) {
+        const { setupState } = instance;
+        console.log("setupState: ", setupState);
+        if (key in setupState) {
+          return setupState[key];
+        }
+      },
+    }
+  );
+
   const { setup } = Component;
   if (setup) {
     const setupResult = setup();
