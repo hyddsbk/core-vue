@@ -2,6 +2,7 @@ export const createComponentInstance = (vnode) => {
   const component = {
     vnode,
     type: vnode.type,
+    setupState: {},
   };
   return component;
 };
