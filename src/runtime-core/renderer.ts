@@ -22,16 +22,23 @@ function processElement(vnode: any, container: any) {
 function mountElement(vnode: any, container: any) {
   const { children, props, shapeFlag } = vnode;
 
-  const el = document.createElement(vnode.type);
+  const el = (vnode.el = document.createElement(vnode.type));
 
   if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
     el.textContent = children;
   } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
     mountChildren(vnode, el);
   }
-
+  // props
   for (const key in props) {
-    el.setAttribute(key, props[key]);
+    console.log("key", key);
+    const isOn = (key: string) => /^on[A-Z]/.test(key);
+    if (isOn(key)) {
+      const event = key.slice(2).toLowerCase();
+      el.addEventListener(event, props[key]);
+    } else {
+      el.setAttribute(key, props[key]);
+    }
   }
   container.append(el);
 }
